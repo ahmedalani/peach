@@ -1,9 +1,10 @@
-import { combinedReducers } from 'redux';
+import { combineReducers } from 'redux';
+import login from '../containers/login/reducer';
 
-const appReducers = combinedReducers (
+const appReducers = combineReducers (
   //reducers...
   {
-
+    login
   }
 );
 
