@@ -21,8 +21,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
 
   <title>React App</title>
 </head>
@@ -31,16 +29,8 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
-  <div id="root"></div>
-  <div id='map' style='width: 400px; height: 300px;'></div>
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiczNsZWhhIiwiYSI6ImNqbjE4N3g4aTA4MTYzd25nbjhsa241c24ifQ.sgj4w6wJphLa-92Mwxhi8w';
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v9'
-    });
-  </script>
 
+  <div id="root"></div>
   <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -54,3 +44,19 @@
 </body>
 
 </html>
+<!-- 
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
+
+
+
+  
+  <div id='map' style='width: 400px; height: 300px;'></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiczNsZWhhIiwiYSI6ImNqbjE4N3g4aTA4MTYzd25nbjhsa241c24ifQ.sgj4w6wJphLa-92Mwxhi8w';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v9'
+    });
+  </script>
+-->
