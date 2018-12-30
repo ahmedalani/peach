@@ -37,10 +37,12 @@ class List extends Component {
   }
   handleClick = (indexForItem, item) => {
     console.log(item, 'shaba6eee');
-    const index = this.props.index;
-    item.checked = !item.checked
-    this.props.changeItem(index, indexForItem, item);
-  }
+    const listIndex = this.props.index;
+    let newItem = {...item};
+    newItem.checked = !newItem.checked; 
+
+    this.props.changeItem(listIndex, indexForItem, newItem);
+  } 
   render() {
     return (
       <ListDiv>
