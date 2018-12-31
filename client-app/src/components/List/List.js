@@ -10,6 +10,9 @@ const ListTitle = styled.div`
   padding: 10px;
   border: 1px solid black;
   border-radius: 1px;
+  &:hover { 
+    background:red;
+  }
 `;
 const ItemsContainer = styled.div`
   /* display:flex; */
@@ -31,22 +34,24 @@ class List extends Component {
         checked: false
       }
       const index = this.props.index;
-      this.props.addItem(index, item);
+      this.props.addItem({ index, item });
       e.target.value = '';
     }
   }
   handleClick = (indexForItem, item) => {
-    console.log(item, 'shaba6eee');
     const listIndex = this.props.index;
     let newItem = {...item};
     newItem.checked = !newItem.checked; 
 
-    this.props.changeItem(listIndex, indexForItem, newItem);
+    this.props.changeItem({listIndex, indexForItem, newItem});
   } 
+  handleEdit = () => {
+    console.log('clicked Edit');
+  }
   render() {
     return (
       <ListDiv>
-        <ListTitle >{this.props.list.title}</ListTitle>
+        <ListTitle >{this.props.list.title}<button onClick={() => this.handleEdit()}>Edit</button></ListTitle>
         <ItemsContainer>
 
           {this.props.list.items.map((item, i) => {

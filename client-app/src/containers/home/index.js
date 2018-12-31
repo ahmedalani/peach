@@ -2,69 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { LoginUser } from './actions';
 import List from '/Users/3lehamacbook/Desktop/peach/client-app/src/components/List/List.js';
-import { SSL_OP_EPHEMERAL_RSA } from 'constants';
-
-const TODOS = [
-  // {
-  //   title: '',
-  //   items: [
-
-  //    ]
-  // }
-];
+import { SetShowInputForTitle, CreateNewList, AddItemToList, ChangeItem } from './actions';
 
 class Home extends Component {
-  state = {
-    TODOS: TODOS,
-    showInputForTitle: false,
-  }
   handleClick = () => {
-    this.setState({ showInputForTitle: true })
-  }
-  addItem = (index = null, item = {}) => {
-    let todos = [...this.state.TODOS];
-    const listToUpdate = todos[index];
-    listToUpdate.items.push(item);
-    todos[index] = listToUpdate;
-    this.setState({ TODOS: todos });
-  }
-
-  changeItem = (listIndex = null, indexForItem, newItem = {}) => {
-
-    // -first copy the todos, 
-    let todos = [...this.state.TODOS];
-
-    // - then find the item  && replace item 
-    todos[listIndex].items[indexForItem] = newItem;
-
-    this.setState({ TODOS: todos });
-
-    // console.log(listIndex, indexForItem, newItem, 'from home.index');
-    // console.log(todos[listIndex].items[indexForItem].checked, 'todos[listIndex]');
-    // const updatedItem = !todos[listIndex].items[indexForItem].checked
-    // this.setState({ TODOS: !todos[listIndex].items[indexForItem].checked }); 
+    this.props.setShowInputForTitle(true);
   }
   handleKeyPress = (e) => {
     const inputValue = e.target.value;
-
     if (e.key === 'Enter') {
-      // console.log('do validate');
-      const newTODOS = this.state.TODOS;
-
-      newTODOS.push({
-        title: `${inputValue}`,
-        items: [
-          // {
-          //   label: "",
-          //   checked: null,
-          // },
-          // {
-          //   label: "",
-          //   checked: null
-          // }
-        ]
-      })
-      this.setState({ TODOS: newTODOS })
+      this.props.createNewList(inputValue);
+      this.props.setShowInputForTitle(false);
       e.target.value = '';
     }
   }
@@ -74,25 +22,39 @@ class Home extends Component {
       <div>
         <div>Home Sweet Home!</div>
         <button onClick={this.handleClick}>CreateNewList</button>
-        {this.state.showInputForTitle && <input onKeyUp={this.handleKeyPress}></input>}
-        {this.state.TODOS.map((todo, index) => <List list={todo} index={index} addItem={this.addItem} changeItem={this.changeItem} />)}
+        {this.props.showInputForTitle && <input onKeyUp={this.handleKeyPress}></input>}
+        {this.props.TODOS.map((todo, index) => <List key={`${todo.title}-${index}`}
+          list={todo} index={index}
+          addItem={this.props.addItemToList}
+          changeItem={this.props.changeItem}
+        />)}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
     // login: state.login,
+    TODOS: state.home.TODOS,
+    showInputForTitle: state.home.showInputForTitle
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // loginUser(payload) { 
-    //   dispatch(LoginUser(payload)) 
-    // }
+    setShowInputForTitle(show) {
+      dispatch(SetShowInputForTitle(show))
+    },
+    createNewList(payload) {
+      dispatch(CreateNewList(payload))
+    },
+    addItemToList(payload) {
+      dispatch(AddItemToList(payload))
+    },
+    changeItem(payload) {
+      dispatch(ChangeItem(payload))
+    }
   }
 }
 
