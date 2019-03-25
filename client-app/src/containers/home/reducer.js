@@ -2,7 +2,8 @@ import * as constants from './constants';
 
 const intialState = {
   TODOS: [],
-  showInputForTitle: false
+  showInputForTitle: false,
+  editListIndex: null
 }
 const home = (
   /*state*/
@@ -33,6 +34,18 @@ const home = (
       let todosToChangeItemLabel = [...state.TODOS];
       todosToChangeItemLabel[payload.listIndex].items[payload.indexForItem] = payload.newItem;
       return { ...state, TODOS: todosToChangeItemLabel };
+    case constants.HANDLE_EDIT_LIST:
+      return { ...state, editListIndex: payload }
+    case constants.SHOW_INPUT_FOR_EDIT:
+      return { ...state, showInputForEdit: payload }
+
+    case constants.CHANGE_LIST_TITLE:
+      const ToDoWithNewTitle = [...state.TODOS];
+      const list = ToDoWithNewTitle[payload.index]
+      list.title  = payload.title;
+      return { ...state, TODOS:ToDoWithNewTitle }
+
+      
 
     default:
       return state

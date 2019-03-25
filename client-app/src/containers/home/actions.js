@@ -1,10 +1,5 @@
 import * as constants from './constants';
 
-
-
-
-
-
 export const SetShowInputForTitle = (payload) => {
   return {
     type: constants.SHOW_INPUT_FOR_TITLE,
@@ -29,5 +24,21 @@ export const ChangeItem = (payload) => {
     payload
   }
 }
-
-
+export const HandleEditList = (payload) => {
+  return {
+    type: constants.HANDLE_EDIT_LIST,
+    payload
+  }
+}
+export const SetShowInputForEdit = (payload) => {
+  return {
+    type: constants.SHOW_INPUT_FOR_EDIT,
+    payload
+  }
+}
+export const ChangeListTitle = (ListIndex, title) => {
+  return {
+    type: constants.CHANGE_LIST_TITLE,
+    payload:{index: ListIndex, title}
+  }
+}

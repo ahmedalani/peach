@@ -36,22 +36,46 @@ class List extends Component {
       const index = this.props.index;
       this.props.addItem({ index, item });
       e.target.value = '';
+      // this.props.editList(null);
+      // console.log('this.prop.isEditing... ', this.props.isEditing);
     }
   }
   handleClick = (indexForItem, item) => {
     const listIndex = this.props.index;
-    let newItem = {...item};
-    newItem.checked = !newItem.checked; 
+    let newItem = { ...item };
+    newItem.checked = !newItem.checked;
 
-    this.props.changeItem({listIndex, indexForItem, newItem});
-  } 
-  handleEdit = () => {
-    console.log('clicked Edit');
+    this.props.changeItem({ listIndex, indexForItem, newItem });
   }
+  handleEdit = (e) => {
+    console.log('clicked Edit');
+    if (e.key === 'Enter') {
+      const title = e.target.value;
+      // console.log(title, "this is the title");
+      const index = this.props.index;
+      // debugger;
+      this.props.changeListTitle(index, title);
+      e.target.value = '';
+      this.props.editList(null);
+    }
+
+    //make list title editable
+    // this.props.editList(this.props.index);
+
+    //show delete button for list
+
+    //show delete button for items in the list
+
+  }
+  isEditing = () => this.props.editList(this.props.index);
+
   render() {
     return (
       <ListDiv>
-        <ListTitle >{this.props.list.title}<button onClick={() => this.handleEdit()}>Edit</button></ListTitle>
+        <ListTitle >{this.props.isEditing ?
+          <input onKeyUp={(e) => this.handleEdit(e)}></input> :
+          this.props.list.title}<button onClick={() => this.isEditing()}>Edit</button>
+        </ListTitle>
         <ItemsContainer>
 
           {this.props.list.items.map((item, i) => {
