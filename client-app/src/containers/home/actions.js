@@ -42,3 +42,9 @@ export const ChangeListTitle = (ListIndex, title) => {
     payload:{index: ListIndex, title}
   }
 }
+export const DeleteItem = (listIndex, indexForItem) => {
+  return {
+    type: constants.DELETE_ITEM,
+    payload:{listIndex, indexForItem}
+  }
+}

@@ -44,8 +44,11 @@ const home = (
       const list = ToDoWithNewTitle[payload.index]
       list.title  = payload.title;
       return { ...state, TODOS:ToDoWithNewTitle }
-
-      
+    case constants.DELETE_ITEM:
+      const todosToDeleteItem = [...state.TODOS];
+      const listToRemoveItem = todosToDeleteItem[payload.listIndex]
+      listToRemoveItem.items.splice(payload.indexForItem, 1);
+      return { ...state, TODOS: todosToDeleteItem }      
 
     default:
       return state

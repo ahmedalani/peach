@@ -41,6 +41,7 @@ class List extends Component {
     }
   }
   handleClick = (indexForItem, item) => {
+
     const listIndex = this.props.index;
     let newItem = { ...item };
     newItem.checked = !newItem.checked;
@@ -48,6 +49,7 @@ class List extends Component {
     this.props.changeItem({ listIndex, indexForItem, newItem });
   }
   handleEdit = (e) => {
+    // e.preventDefault();
     console.log('clicked Edit');
     if (e.key === 'Enter') {
       const title = e.target.value;
@@ -69,6 +71,12 @@ class List extends Component {
   }
   isEditing = () => this.props.editList(this.props.index);
 
+  deleteItemFromList = (indexForItem, item) => {
+    console.log('Delete!', 'index: ', indexForItem, 'item: ', item, 'list i: ', this.props.index);
+    const listIndex = this.props.index;
+    this.props.deleteItem(listIndex, indexForItem);
+  }
+
   render() {
     return (
       <ListDiv>
@@ -79,11 +87,14 @@ class List extends Component {
         <ItemsContainer>
 
           {this.props.list.items.map((item, i) => {
-            return (
-              <Item key={`${item.label}-${i}`} onClick={() => this.handleClick(i, item)}>
+            return (<div>
+
+              <Item key={`${item.label}-${i}`} onClick={(e) => { e.preventDefault(); this.handleClick(i, item) }}>
                 <div>{item.label}</div>
-                <div>  {item.checked ? 'X' : '-'}</div>
+                <div>{item.checked ? 'X' : '-'}</div>
               </Item>
+              <button onClick={(e) => { e.preventDefault(); this.deleteItemFromList(i, item) }}>Delete</button>
+            </div>
             )
           })
           }

@@ -5,3 +5,4 @@ export const CHANGE_ITEM = 'CHANGE_ITEM';
 export const HANDLE_EDIT_LIST = 'HANDLE_EDIT_LIST';
 export const SHOW_INPUT_FOR_EDIT = 'SHOW_INPUT_FOR_EDIT';
 export const CHANGE_LIST_TITLE = 'CHANGE_LIST_TITLE';
+export const DELETE_ITEM = 'DELETE_ITEM';

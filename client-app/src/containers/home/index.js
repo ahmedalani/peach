@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { LoginUser } from './actions';
 import List from '/Users/3lehamacbook/Desktop/peach/client-app/src/components/List/List.js';
-import { SetShowInputForTitle, CreateNewList, AddItemToList, ChangeItem, HandleEditList, SetShowInputForEdit, ChangeListTitle } from './actions';
+import { SetShowInputForTitle, CreateNewList, AddItemToList, ChangeItem, HandleEditList, SetShowInputForEdit, ChangeListTitle, DeleteItem } from './actions';
 
 class Home extends Component {
   handleClick = () => {
@@ -37,6 +37,7 @@ class Home extends Component {
             isEditing={this.props.editListIndex === index}
             handleKeyPress={this.handleKeyPress}
             changeListTitle={this.props.changeListTitle}
+            deleteItem={this.props.deleteItem}
           />)}
       </div>
     )
@@ -74,6 +75,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     changeListTitle(index, title) {
       dispatch(ChangeListTitle(index, title))
+    },
+    deleteItem(listIndex, indexForItem) {
+      dispatch(DeleteItem(listIndex, indexForItem))
     }
   }
 }
