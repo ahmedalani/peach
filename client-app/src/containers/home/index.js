@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { LoginUser } from './actions';
 import List from '/Users/3lehamacbook/Desktop/peach/client-app/src/components/List/List.js';
 import { SetShowInputForTitle, CreateNewList, AddItemToList, ChangeItem, HandleEditList, SetShowInputForEdit, ChangeListTitle, DeleteItem } from './actions';
 
@@ -16,9 +15,7 @@ class Home extends Component {
       e.target.value = '';
     }
   }
-  // handleEdit = (listIndex) => {
-  //   console.log(listIndex, 'list index');
-  // } 
+
   render() {
 
     return (
@@ -46,7 +43,6 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // login: state.login,
     TODOS: state.home.TODOS,
     showInputForTitle: state.home.showInputForTitle,
     editListIndex: state.home.editListIndex
