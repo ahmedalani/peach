@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import { withRouter } from 'react-router-dom';
-import './List.css';
 import styled from 'styled-components'
 
 const ListDiv = styled.div`
@@ -36,12 +34,10 @@ class List extends Component {
       const index = this.props.index;
       this.props.addItem({ index, item });
       e.target.value = '';
-      // this.props.editList(null);
-      // console.log('this.prop.isEditing... ', this.props.isEditing);
     }
   }
-  handleClick = (indexForItem, item) => {
-
+  handleClick = (e, indexForItem, item) => {
+    e.preventDefault();
     const listIndex = this.props.index;
     let newItem = { ...item };
     newItem.checked = !newItem.checked;
@@ -49,30 +45,18 @@ class List extends Component {
     this.props.changeItem({ listIndex, indexForItem, newItem });
   }
   handleEdit = (e) => {
-    // e.preventDefault();
-    console.log('clicked Edit');
     if (e.key === 'Enter') {
       const title = e.target.value;
-      // console.log(title, "this is the title");
       const index = this.props.index;
-      // debugger;
       this.props.changeListTitle(index, title);
       e.target.value = '';
       this.props.editList(null);
     }
-
-    //make list title editable
-    // this.props.editList(this.props.index);
-
-    //show delete button for list
-
-    //show delete button for items in the list
-
   }
   isEditing = () => this.props.editList(this.props.index);
 
-  deleteItemFromList = (indexForItem, item) => {
-    console.log('Delete!', 'index: ', indexForItem, 'item: ', item, 'list i: ', this.props.index);
+  deleteItemFromList = (e, indexForItem) => {
+    e.preventDefault();
     const listIndex = this.props.index;
     this.props.deleteItem(listIndex, indexForItem);
   }
@@ -87,13 +71,13 @@ class List extends Component {
         <ItemsContainer>
 
           {this.props.list.items.map((item, i) => {
-            return (<div>
-
-              <Item key={`${item.label}-${i}`} onClick={(e) => { e.preventDefault(); this.handleClick(i, item) }}>
+            return (
+            <div>
+              <Item key={`${item.label}-${i}`} onClick={(e) =>  this.handleClick(e, i, item)}>
                 <div>{item.label}</div>
                 <div>{item.checked ? 'X' : '-'}</div>
               </Item>
-              <button onClick={(e) => { e.preventDefault(); this.deleteItemFromList(i, item) }}>Delete</button>
+              <button onClick={(e) =>  this.deleteItemFromList(e, i)}>Delete</button>
             </div>
             )
           })
