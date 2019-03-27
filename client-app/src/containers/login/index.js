@@ -8,7 +8,6 @@ class Login extends Component {
     this.props.history.push('/home');
   }
   render() {
-
     return (
       <div>
         <div>user is {this.props.login.isLoggedIn ? 'Logged in' :'Is not Logged in'}</div>
@@ -19,11 +18,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log(state)
   return {
-    login: state.login
+    login: state.login,
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     loginUser(payload) { 

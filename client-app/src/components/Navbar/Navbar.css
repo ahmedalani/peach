@@ -1,0 +1,23 @@
+/* Add a black background color to the top navigation */
+.navbar {
+  display:flex;
+  background-color: rgb(125, 130, 199);
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.navbar .navbar-item {
+  cursor: pointer;
+  padding: 14px 16px; 
+}
+
+/* Change the color of links on hover */
+/* .navbar .navbar-item:hover {
+
+} */
+
+/* Add a color to the active/current link */
+.navbar .navbar-item--active {
+  padding: 14px 16px;
+  background-color: #4CAF50;
+}
